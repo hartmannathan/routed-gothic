@@ -1,6 +1,6 @@
 import gulp from "gulp";
 import gulpSass from "gulp-sass";
-import sassPkg from "sass";
+import * as sassPkg from "sass";
 import browserSync from "browser-sync";
 import { nunjucksCompile as nunjucks } from "gulp-nunjucks";
 
@@ -33,7 +33,8 @@ function serveTask() {
         startPath: "/fonts/routed-gothic/",
         server: {
             baseDir: "./public",
-        }
+        },
+        watch: true,
     });
 }
 
