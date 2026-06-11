@@ -80,6 +80,20 @@ sass:
 downloads:
 	$(SUPPORT_BIN)/make-downloads
 
+DRAWINGS_SRC	= public/fonts/routed-gothic/drawings/vector/marlo.svg \
+		  public/fonts/routed-gothic/drawings/vector/schematic.svg \
+		  public/fonts/routed-gothic/drawings/vector/blueprint.svg
+
+DRAWINGS_PNG	= $(patsubst %.svg,%.png,$(DRAWINGS_SRC))
+
+.PHONY: drawings
+drawings: $(DRAWINGS_PNG)
+
+%.png: %.svg Makefile
+	inkscape --export-background=white --export-type=png --export-filename "$@.tmp.png" "$<"
+	mv "$@.tmp.png" "$@"
+	file "$@"
+
 publish:
 	mkdir -p public/fonts/routed-gothic/dist/ttf
 	cp dist/ttf/* public/fonts/routed-gothic/dist/ttf
